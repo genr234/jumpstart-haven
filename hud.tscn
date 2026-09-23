@@ -1,0 +1,196 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_hud"]
+[ext_resource type="LabelSettings" path="res://hud_text.tres" id="2_text"]
+[ext_resource type="Texture2D" path="res://assets/graveyard/life.png" id="3_life"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_percent"]
+font_size = 72
+outline_size = 14
+outline_color = Color(0.08, 0.05, 0.12, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gameover"]
+font_size = 64
+line_spacing = 6.0
+outline_size = 16
+outline_color = Color(0.08, 0.05, 0.12, 1)
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ko_flash"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.7), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_game_over"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hud"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"game_over": SubResource("Animation_game_over"),
+&"ko_flash": SubResource("Animation_ko_flash")
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="Flash" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 16
+
+[node name="PlayerPanel" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = -6
+
+[node name="Percent" type="Label" parent="MarginContainer/PlayerPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0%"
+label_settings = SubResource("LabelSettings_percent")
+
+[node name="Stocks" type="HBoxContainer" parent="MarginContainer/PlayerPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Life1" type="TextureRect" parent="MarginContainer/PlayerPanel/Stocks"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+texture = ExtResource("3_life")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life2" type="TextureRect" parent="MarginContainer/PlayerPanel/Stocks"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+texture = ExtResource("3_life")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life3" type="TextureRect" parent="MarginContainer/PlayerPanel/Stocks"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+texture = ExtResource("3_life")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "KOs  0
+0.0s"
+label_settings = ExtResource("2_text")
+horizontal_alignment = 2
+
+[node name="GameOver" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "KO'd!"
+label_settings = SubResource("LabelSettings_gameover")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hud")
+}
