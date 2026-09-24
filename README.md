@@ -7,3 +7,4 @@ A game where you need to constantly fight an increasing amount of enemies while 
 Assets from
 - https://craftpix.net/freebies/free-forbidden-graveyard-2d-platformer-tileset/
 - https://opengameart.org/content/skeleton-animations
+- https://opengameart.org/content/golem-animations
