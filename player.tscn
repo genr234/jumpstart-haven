@@ -1,18 +1,180 @@
 [gd_scene format=3 uid="uid://bkw3bcjlav324"]
 
 [ext_resource type="Script" uid="uid://c6l5rttn24y0y" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://vkhqbhnm7ll8" path="res://icon.svg" id="2_i3pqv"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_1.png" id="3_idle1"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_2.png" id="4_idle2"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_3.png" id="5_idle3"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_4.png" id="6_idle4"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_5.png" id="7_idle5"]
+[ext_resource type="Texture2D" path="res://assets/player/idle_6.png" id="8_idle6"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_1.png" id="9_attack1"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_2.png" id="10_attack2"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_3.png" id="11_attack3"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_4.png" id="12_attack4"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_5.png" id="13_attack5"]
+[ext_resource type="Texture2D" path="res://assets/player/attack_6.png" id="14_attack6"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_1.png" id="15_appear1"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_2.png" id="16_appear2"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_3.png" id="17_appear3"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_4.png" id="18_appear4"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_5.png" id="19_appear5"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_6.png" id="20_appear6"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_7.png" id="21_appear7"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_8.png" id="22_appear8"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_9.png" id="23_appear9"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_10.png" id="24_appear10"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_11.png" id="25_appear11"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_12.png" id="26_appear12"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_13.png" id="27_appear13"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_14.png" id="28_appear14"]
+[ext_resource type="Texture2D" path="res://assets/player/appear_15.png" id="29_appear15"]
+[ext_resource type="Texture2D" path="res://assets/player/die_1.png" id="30_die1"]
+[ext_resource type="Texture2D" path="res://assets/player/die_2.png" id="31_die2"]
+[ext_resource type="Texture2D" path="res://assets/player/die_3.png" id="32_die3"]
+[ext_resource type="Texture2D" path="res://assets/player/die_4.png" id="33_die4"]
+[ext_resource type="Texture2D" path="res://assets/player/die_5.png" id="34_die5"]
+[ext_resource type="Texture2D" path="res://assets/player/die_6.png" id="35_die6"]
+[ext_resource type="Texture2D" path="res://assets/player/die_7.png" id="36_die7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_golem"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_idle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_idle6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_attack1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_attack2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_attack3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_attack4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_attack5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_attack6")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_appear1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_appear2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_appear3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_appear4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_appear5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_appear6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_appear7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_appear8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_appear9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_appear10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_appear11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_appear12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_appear13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_appear14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_appear15")
+}],
+"loop": false,
+"name": &"appear",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_die1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_die2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_die3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_die4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_die5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_die6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_die7")
+}],
+"loop": false,
+"name": &"die",
+"speed": 12.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dnek"]
-size = Vector2(44, 90)
+size = Vector2(70, 90)
 
 [node name="Player" type="CharacterBody2D" unique_id=1912723971]
 script = ExtResource("1_onrkg")
+sprite_faces_left = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1912715668]
-position = Vector2(41, 45.249996)
-scale = Vector2(0.34374997, 0.6992187)
-texture = ExtResource("2_i3pqv")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1912715668]
+position = Vector2(41, 34)
+scale = Vector2(0.32, 0.32)
+sprite_frames = SubResource("SpriteFrames_golem")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -76)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=637086994]
 position = Vector2(41, 45)

@@ -2,3 +2,24 @@
 .godot/
 /android/
 addons/
+
+# Export / build output
+export/
+*.pck
+*.wasm
+*.apk
+*.aab
+*.exe
+*.x86_64
+*.dmg
+
+# Export credentials (keep export_presets.cfg itself tracked)
+.export_presets.cfg
+*.keystore
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/

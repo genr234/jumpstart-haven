@@ -25,7 +25,7 @@ repeat_size = Vector2(2401.2, 0)
 repeat_times = 3
 
 [node name="Image" type="Sprite2D" parent="Background" unique_id=1698141081]
-position = Vector2(-1200, -800)
+position = Vector2(-1199, -800)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("4_1bvp3")
 centered = false

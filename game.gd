@@ -83,11 +83,11 @@ func spawn_enemy() -> void:
 	e.target = player
 	e.stage_rect = stage_rect
 	e.team = 1
-	e.tint = Color(1, 0.45, 0.45)
+	e.tint = Color(1, 0.8, 0.8)
 	# spawn big enemy every 8th enemy
 	if spawned % 8 == 0:
 		e.weight = 2.0
-		e.tint = Color(0.6, 0.15, 0.15)
+		e.tint = Color(1, 0.5, 0.5)
 		e.scale = Vector2(1.4, 1.4)
 	var x := randf_range(stage_rect.position.x + 150, stage_rect.end.x - 150)
 	e.position = Vector2(x, stage_rect.position.y - 400)

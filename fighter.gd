@@ -28,6 +28,7 @@ const PLATFORM_LAYER = 3           # physics layer of the one-way platforms
 @export var weight := 1.0
 @export var tint := Color.WHITE
 @export var team := 0
+@export var sprite_faces_left := false
 
 var damage := 0.0
 var facing := 1.0
@@ -49,7 +50,8 @@ var jump_held := false
 var down_held := false
 var attack_pressed := false
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Node2D = $Sprite
+@onready var anim := sprite as AnimatedSprite2D  # null for a plain Sprite2D
 @onready var center: Vector2 = $CollisionShape2D.position
 @onready var sprite_home: Vector2 = sprite.position
 @onready var sprite_scale: Vector2 = sprite.scale
@@ -128,7 +130,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, target_x, accel * delta)
 	if in_control and move_dir != 0.0:
 		facing = signf(move_dir)
-	sprite.flip_h = facing < 0.0
+	sprite.set("flip_h", (facing < 0.0) != sprite_faces_left)
 
 	if in_control and attack_pressed and cooldown <= 0.0:
 		attack()
@@ -151,6 +153,18 @@ func _physics_process(delta: float) -> void:
 		jumping = false
 		if fall_speed > 400.0:
 			squash(Vector2(1.3, 0.75))
+	update_anim()
+
+func play_anim(anim_name: StringName) -> void:
+	if anim and anim.sprite_frames.has_animation(anim_name):
+		anim.play(anim_name)
+
+func update_anim() -> void:
+	# one-shot animations (attack, appear, die) run to the end before looping ones resume
+	if anim == null or (anim.is_playing() and not anim.sprite_frames.get_animation_loop(anim.animation)):
+		return
+	var moving := is_on_floor() and absf(velocity.x) > 50.0
+	play_anim(&"walk" if moving and anim.sprite_frames.has_animation(&"walk") else &"idle")
 
 func attack() -> void:
 	attack_time = ATTACK_ACTIVE_TIME
@@ -160,6 +174,7 @@ func attack() -> void:
 	t.tween_property(sprite, "position", sprite_home + Vector2(25 * facing, 0), 0.05)
 	t.tween_property(sprite, "position", sprite_home, 0.1)
 	slash.modulate.a = 1.0
+	play_anim(&"attack")
 	create_tween().tween_property(slash, "modulate:a", 0.0, 0.18)
 
 func hit_overlaps(area: Area2D, amount: float) -> void:
@@ -196,6 +211,7 @@ func respawn(at: Vector2) -> void:
 	invulnerable = 2.0
 	stop_spin()
 	reset_physics_interpolation()
+	play_anim(&"appear")
 
 func spin() -> void:
 	stop_spin()

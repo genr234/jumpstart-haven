@@ -6,6 +6,7 @@ const WINDUP_TIME = 0.3
 var target: Fighter
 var stage_rect: Rect2
 var windup := 0.0
+var has_landed := false
 
 func read_input() -> void:
 	move_dir = 0.0
@@ -13,6 +14,14 @@ func read_input() -> void:
 	jump_held = true
 	down_held = false
 	attack_pressed = false
+
+	# rise out of the ground on first landing, and stand still until that finishes
+	if not has_landed and is_on_floor():
+		has_landed = true
+		play_anim(&"appear")
+	if anim and anim.animation == &"appear" and anim.is_playing():
+		return
+
 	var pos := global_position + center
 
 	if pos.x < stage_rect.position.x or pos.x > stage_rect.end.x or pos.y > stage_rect.end.y:
